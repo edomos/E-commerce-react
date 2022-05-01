@@ -2,6 +2,7 @@ import Landing from "./components/Landing";
 import Nav from "./components/Nav"
 import Highlights from "./components/Highlights";
 import Featured from "./components/Featured";
+import Discounted from "./components/Discounted";
 
 function App() {
   return (
@@ -10,6 +11,7 @@ function App() {
       <Landing />
       <Highlights />
       <Featured />
+      <Discounted />
     </div>
   );
 }
