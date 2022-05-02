@@ -1,15 +1,24 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import Book from '../components/ui/Book';
 import Price from '../components/ui/Price';
 import Rating from '../components/ui/Rating';
 
-const Bookinfo = ({ books }) => {
+const BookInfo = ({ books, addToCart, cart }) => {
     const { id } = useParams();
-    const book = books.find(book => +book.id === +id)
-    console.log(book)
-    console.log(id)
+    const book = books.find((book) => +book.id === +id)
+    const [added, setAdded] = useState(false);
+
+    function addBookToCart(book) {
+        setAdded(true)
+        addToCart(book)
+    }
+
+    function bookExistsOnCart() {
+        return cart.find(book => +book.id === +id);
+    }
+
     return (
         <div id="books__body">
             <main id="books__main">
@@ -48,9 +57,16 @@ const Bookinfo = ({ books }) => {
                                         Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas eos possimus quas nulla maxime ab, ratione nam aperiam? Lorem ipsum dolor sit amet consectetur.
                                     </p>
                                 </div>
-                                <button className="btn">
-                                    Add to cart
-                                </button>
+                                {bookExistsOnCart() ? (
+                                    <Link to={`/cart`}
+                                     className="book__link">
+                                    <button className="btn">Checkout</button> 
+                                    </Link>
+                                ) : (
+                                    <button className="btn" onClick={() => addBookToCart(book)}>
+                                        Add to cart
+                                    </button>
+                                )}
                             </div>
                         </div>
                     </div>
@@ -77,4 +93,4 @@ const Bookinfo = ({ books }) => {
     );
 }
 
-export default Bookinfo;
+export default BookInfo;
