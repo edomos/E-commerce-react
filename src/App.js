@@ -99,7 +99,6 @@ function App() {
               removeFromCart={removeFromCart}
               />} 
             />
-          {/* <Footer /> */}
         </Routes>
         <Footer />
       </div>
